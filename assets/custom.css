@@ -1,0 +1,17 @@
+div.inputs {
+  display: table;
+  border-collapse: collapse;
+}
+div.input-row {
+  display: table-row;
+}
+div.input-label {
+  display: table-cell;
+  text-align: right;
+}
+div.input{
+  display: table-cell;
+}
+input[type=text]:disabled {
+  background: #DDDDDD;
+}
