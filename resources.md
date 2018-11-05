@@ -19,6 +19,7 @@ Here are links to other web sites relevant to Factorio, including other calculat
 * [Factorio cheat sheet](https://factoriocheatsheet.com/)
 * [Factorio reference sheet](http://referencio.info/)
 * [Autorio Blueprint Tool](http://autotorio.com/blueprint)
+* [Factorio Prints](https://factorioprints.com/)
 * [Factorio Calculator](https://kirkmcdonald.github.io/)
 * [Factorio Planner](https://doomeer.com/factorio/)
 
