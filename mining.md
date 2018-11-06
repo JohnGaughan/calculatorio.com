@@ -1,8 +1,9 @@
 ---
-layout: default
+layout: calculator
 title: Mining
 navigation_weight: 30
 permalink: /mining/
+factorio_version: 0.16.51
 ---
 
 ## Electric mining drills required to saturate a belt

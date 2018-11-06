@@ -1,8 +1,9 @@
 ---
-layout: default
+layout: calculator
 title: Assemblers
 navigation_weight: 50
 permalink: /assemblers/
+factorio_version: 0.16.51
 ---
 
 ## Item production rate

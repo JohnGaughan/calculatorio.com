@@ -1,8 +1,9 @@
 ---
-layout: default
+layout: calculator
 title: Science
 navigation_weight: 70
 permalink: /science/
+factorio_version: 0.16.51
 ---
 
 ## Assemblers required for a given science per minute

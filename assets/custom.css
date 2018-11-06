@@ -9,13 +9,12 @@ div.input-label {
   display: table-cell;
   text-align: right;
 }
-div.input{
+div.input {
   display: table-cell;
 }
 input[type=text]:disabled {
   background: #DDDDDD;
 }
-
 div.table {
   display: table;
   border-collapse: separate;
@@ -29,7 +28,12 @@ div.table-header {
 div.table-row {
   display: table-row;
 }
-div.table-cell{
+div.table-cell {
   display: table-cell;
   border: inherit;
+}
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
