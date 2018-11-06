@@ -9,11 +9,7 @@ permalink: /about/
 
 I created this web site to share with the world some of the work I have done on various Factorio calculators, spreadsheets, and other creations.
 
-The official wiki is no longer a place to store user creations, and certain [popular content](/balancers/) has been removed. While not exactly calculators, some of that content has a home here.
-
 This site does not contain any paid advertising nor does it knowingly track users. My goal is to have a simple site that loads quickly and is completely non-commercial.
-
-[Jekyll](https://jekyllrb.com/) is the software used to build this site. It is generated similar to a code compiler, resulting in static HTML and CSS files used on the web server. This reduces server load and prevents many security problems caused by technology such as PHP.
 
 You can view the entire site's source code in [the Calculatorio repository on GitHub](https://github.com/calculatorio/calculatorio.com).
 

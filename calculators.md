@@ -5,17 +5,19 @@ navigation_weight: 50
 permalink: /calculators/
 ---
 
-## Factorio Reference
+## Factorio Calculators
 
 The calculators in this page are valid for Factorio version 0.16. Factorio 0.17 is [confirmed to alter some of the data](https://www.factorio.com/blog/post/fff-266) used in the calculators. If you are reading this message after 0.17 is released but before I update the calculators and edit this intro, keep in mind that some of them may produce incorrect results.
+
+These calculators focus on the micro-level, not the macro level. Other calculators can tell you total iron consumption of a factory, but not how many belts of ore you can get out of an iron patch or how many drills you need to fill those belts.
 
 All calculations are driven by client-side JavaScript, which must be enabled for them to work.
 
 Any time an input box requests the speed of a machine, hover over it in-game and use the value provided by the game's UI. This takes into account the base speed of the machine, any speed upgrades, modules, and beacons. Productivity is expressed as a percentage in-game, and should be entered as a decimal here. Base productivity is 1, 40% bonus is 1.4.
 
-### Electric mining drills required to saturate a belt
+## Electric mining drills required to saturate a belt
 
-Given a resource patch of a certain type and a specified level of mining productivity research, how many electric mining drills are required to saturate the entire belt? Please note that drills are unlikely to <em>compress</em> a belt without additional effort.
+Given a resource patch of a certain type and a specified level of mining productivity research, how many electric mining drills are required to saturate the entire belt?
 
 The first number is the calculated number for the entire belt, but is likely a fraction and not practical. The second number is divided by two and rounded up, giving an integer number of drills to put on each side.
 
@@ -67,7 +69,70 @@ document.getElementById("drillsPerLane").value = perLane.toFixed(0);
 }
 </script>
 
-### Item production rate
+## Belts for a given number of drills on an ore patch
+
+When cramming as many drills as possible into an ore patch, some of the belt lines might not have enough drills to compress the belt. Perhaps you have five belts coming from the ore patch, but only enough ore to saturate two belts. It helps to know exactly how many belts can be compressed to avoid building extra lines of belts and furnaces for maximum efficiency. This is crucial in the early game when resources are scarce, because you are in the process of setting up your production lines. In the previous example, it would make sense to use a 5-to-2 belt balancer (reducer) to shrink the number of belts, saving resources.
+
+This calculator is a sort-of inverse of the one above that tells you how many drills you need. This one takes the number of drills on each side of the belt, and tells you how many belts' worth of ore it will produce for each lane (left and right). If the two lanes are more than a little bit uneven, it may be worth redirecting some ore output onto the opposite lane.
+
+<div class="inputs">
+<div class="input-row">
+<div class="input-label">Belt tier:</div>
+<div class="input">
+<select id="beltsPerPatchTier">
+<option value="13.33">Yellow</option>
+<option value="26.67">Red</option>
+<option value="40">Blue</option>
+</select>
+</div>
+</div>
+<div class="input-row">
+<div class="input-label">Material being mined:</div>
+<div class="input">
+<select id="beltsPerPatchMaterial">
+<option value="0.525">Coal, Iron, Copper</option>
+<option value="0.65">Stone</option>
+<option value="0.2625">Uranium</option>
+</select>
+</div>
+</div>
+<div class="input-row">
+<div class="input-label">Productivity research level:</div>
+<div class="input"><input type="text" id="beltsPerPatchProd" value="0" size="3"/></div>
+</div>
+<div class="input-row">
+<div class="input-label">Drills feeding left lane:</div>
+<div class="input"><input type="text" id="drillsPerBeltLeft" size="5"/></div>
+</div>
+<div class="input-row">
+<div class="input-label">Drills feeding right lane:</div>
+<div class="input"><input type="text" id="drillsPerBeltRight" size="5"/></div>
+</div>
+<div class="input-row">
+<div class="input-label">Belts of output in the left lane:</div>
+<div class="input"><input type="text" id="drillsPerBeltLeftThroughput" disabled="" readonly="" size="5"/></div>
+</div>
+<div class="input-row">
+<div class="input-label">Belts of output in the right lane:</div>
+<div class="input"><input type="text" id="drillsPerBeltRightThroughput" disabled="" readonly="" size="5"/></div>
+</div>
+<div class="input-row">
+<div class="input-label"></div>
+<div><button onclick="calculateBeltsPerPatch();">Calculate</button></div>
+</div>
+</div>
+<script>
+function calculateBeltsPerPatch() {
+var p = 1 + 2 * Number(document.getElementById("beltsPerPatchProd").value) / 100;
+var drillsPerBelt = Number(document.getElementById("beltsPerPatchTier").value) / (Number(document.getElementById("beltsPerPatchMaterial").value) * p);
+var beltsLeft = document.getElementById("drillsPerBeltLeft").value / drillsPerBelt;
+var beltsRight = document.getElementById("drillsPerBeltRight").value / drillsPerBelt;
+document.getElementById("drillsPerBeltLeftThroughput").value = beltsLeft.toFixed(2);
+document.getElementById("drillsPerBeltRightThroughput").value = beltsRight.toFixed(2);
+}
+</script>
+
+## Item production rate
 
 When using beacons and modules, ratios can get a bit wonky. It helps to normalize this by figuring out how many items a particular group of assembling machines produce per unit time, as well as how many multiples of their inputs are consumed in that unit time: due to productivity bonuses, the two do not always match.
 
@@ -131,7 +196,7 @@ document.getElementById("itemProductionRateConsumeMin").value = consumedPerMinut
 }
 </script>
 
-### Assemblers required for a given science per minute
+## Assemblers required for a given science per minute
 
 If your target is X science per minute, this will tell you how many assemblers you need for each science pack given particular bonuses for speed and productivity. Defaults assume speed 3 modules in eight beacons near each assembler, with four productivity 3 modules in assembler 3s.
 
@@ -199,7 +264,7 @@ document.getElementById("spmHighTech").value = yellow.toFixed(2);
 }
 </script>
 
-### Science lab consumption of science packs
+## Science lab consumption of science packs
 
 Megabases are measured in how many science packs they both produce and consume per minute. It is important to balance production and consumption. Most infinite research tasks require a base of 60 seconds. However, some require less. Check the research UI in game. Lab speed and productivity are provided by the game's UI when hovering over a science lab and includes lab speed upgrades.
 
