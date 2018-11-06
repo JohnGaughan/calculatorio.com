@@ -16,9 +16,9 @@ The first number is the calculated number for the entire belt, but is likely a f
 <div class="input-label">Belt tier:</div>
 <div class="input">
 <select id="drillsPerBeltTier">
-<option value="13.33">Yellow</option>
-<option value="26.67">Red</option>
-<option value="40">Blue</option>
+{% for belt in site.data.belt %}
+<option value="{{ belt.speed }}">{{ belt.name }}</option>
+{% endfor %}
 </select>
 </div>
 </div>
@@ -26,9 +26,9 @@ The first number is the calculated number for the entire belt, but is likely a f
 <div class="input-label">Material being mined:</div>
 <div class="input">
 <select id="drillsPerBeltMaterial">
-<option value="0.525">Coal, Iron, Copper</option>
-<option value="0.65">Stone</option>
-<option value="0.2625">Uranium</option>
+{% for ore in site.data.ore %}
+<option value="{{ ore.hardness }}">{{ ore.name }}</option>
+{% endfor %}
 </select>
 </div>
 </div>
@@ -70,9 +70,9 @@ This calculator is a sort-of inverse of the one above that tells you how many dr
 <div class="input-label">Belt tier:</div>
 <div class="input">
 <select id="beltsPerPatchTier">
-<option value="13.33">Yellow</option>
-<option value="26.67">Red</option>
-<option value="40">Blue</option>
+{% for belt in site.data.belt %}
+<option value="{{ belt.speed }}">{{ belt.name }}</option>
+{% endfor %}
 </select>
 </div>
 </div>
@@ -80,9 +80,9 @@ This calculator is a sort-of inverse of the one above that tells you how many dr
 <div class="input-label">Material being mined:</div>
 <div class="input">
 <select id="beltsPerPatchMaterial">
-<option value="0.525">Coal, Iron, Copper</option>
-<option value="0.65">Stone</option>
-<option value="0.2625">Uranium</option>
+{% for ore in site.data.ore %}
+<option value="{{ ore.hardness }}">{{ ore.name }}</option>
+{% endfor %}
 </select>
 </div>
 </div>
