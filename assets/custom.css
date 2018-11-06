@@ -15,3 +15,21 @@ div.input{
 input[type=text]:disabled {
   background: #DDDDDD;
 }
+
+div.table {
+  display: table;
+  border-collapse: separate;
+  border-spacing: 10px;
+}
+div.table-header {
+  display: table-row;
+  font-weight: bold;
+  border-bottom: 2px solid #C44;
+}
+div.table-row {
+  display: table-row;
+}
+div.table-cell{
+  display: table-cell;
+  border: inherit;
+}

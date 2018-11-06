@@ -121,3 +121,58 @@ document.getElementById("drillsPerBeltLeftThroughput").value = beltsLeft.toFixed
 document.getElementById("drillsPerBeltRightThroughput").value = beltsRight.toFixed(2);
 }
 </script>
+
+## Mining productivity breakpoints for electric mining drills on belts
+
+When researching mining productivity, not every level of research will affect the number of drills needed to compress a belt of ore. Just in case you are contemplating starting that next level of research before bed but are not sure if it will have a meaningful impact on the number of drills per belt, this calculator will tell you the breakpoints.
+
+Please note that this calculator determines the number of drills _per side_ of the belt, since that is the practical application. If it takes 27 drills to saturate a belt, few people will bother concocting a way to have that odd-drill-out alternate belt lanes.
+
+<div class="inputs">
+<div class="input-row">
+<div class="input-label">Belt tier:</div>
+<div class="input">
+<select id="prodBreakpointsTier">
+{% for belt in site.data.belt %}
+<option value="{{ belt.speed }}">{{ belt.name }}</option>
+{% endfor %}
+</select>
+</div>
+</div>
+<div class="input-row">
+<div class="input-label">Material being mined:</div>
+<div class="input">
+<select id="prodBreakpointsMaterial">
+{% for ore in site.data.ore %}
+<option value="{{ ore.hardness }}">{{ ore.name }}</option>
+{% endfor %}
+</select>
+</div>
+</div>
+<div class="input-row">
+<div class="input-label"></div>
+<div><button onclick="calculateProdBreakpoints();">Calculate</button></div>
+</div>
+</div>
+<div class="table" id="prodBreakpointsOutput"></div>
+<script>
+function calculateProdBreakpoints() {
+
+var html = '<div class="table-header"><div class="table-cell">Productivity Level</div><div class="table-cell">Drills Per Side</div></div>';
+
+var beltSpeed = document.getElementById("prodBreakpointsTier").value;
+var hardness = document.getElementById("prodBreakpointsMaterial").value;
+
+var prod = 0;
+var previousDrills = -1;
+while (previousDrills != 1) {
+var drills = Math.ceil((beltSpeed) / (hardness * (1 + 2 * prod / 100)) / 2);
+if (drills != previousDrills) {
+html += '<div class="table-row"><div class="table-cell">' + prod + '</div><div class="table-cell">' + drills + '</div></div>';
+previousDrills = drills;
+}
+++prod;
+}
+document.getElementById("prodBreakpointsOutput").innerHTML = html;
+}
+</script>
