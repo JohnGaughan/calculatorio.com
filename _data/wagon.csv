@@ -1,0 +1,4 @@
+name,air_resistance
+Locomotive,0.0075
+"Cargo, Fluid",0.01
+Artillery,0.015
