@@ -3,7 +3,7 @@ layout: calculator
 title: Mining
 navigation_weight: 30
 permalink: /mining/
-factorio_version: 0.16.51
+factorio_version: 0.17.2
 ---
 
 ## Electric mining drills required to saturate a belt
@@ -28,7 +28,7 @@ The first number is the calculated number for the entire belt, but is likely a f
 <div class="input">
 <select id="drillsPerBeltMaterial">
 {% for ore in site.data.ore %}
-<option value="{{ ore.hardness }}">{{ ore.name }}</option>
+<option value="{{ ore.speed }}">{{ ore.name }}</option>
 {% endfor %}
 </select>
 </div>
@@ -55,7 +55,7 @@ function calculateDrillsPerBelt() {
 var p = 1 + 2 * Number(document.getElementById("drillsPerBeltProd").value) / 100;
 var drills = Number(document.getElementById("drillsPerBeltTier").value) / (Number(document.getElementById("drillsPerBeltMaterial").value) * p);
 document.getElementById("drillsPerBelt").value = drills.toFixed(2);
-var perLane = 0.5 + drills / 2;
+var perLane = Math.ceil(drills / 2);
 document.getElementById("drillsPerLane").value = perLane.toFixed(0);
 }
 </script>
@@ -82,7 +82,7 @@ This calculator is a sort-of inverse of the one above that tells you how many dr
 <div class="input">
 <select id="beltsPerPatchMaterial">
 {% for ore in site.data.ore %}
-<option value="{{ ore.hardness }}">{{ ore.name }}</option>
+<option value="{{ ore.speed }}">{{ ore.name }}</option>
 {% endfor %}
 </select>
 </div>
@@ -145,7 +145,7 @@ Please note that this calculator determines the number of drills _per side_ of t
 <div class="input">
 <select id="prodBreakpointsMaterial">
 {% for ore in site.data.ore %}
-<option value="{{ ore.hardness }}">{{ ore.name }}</option>
+<option value="{{ ore.speed }}">{{ ore.name }}</option>
 {% endfor %}
 </select>
 </div>
@@ -162,12 +162,12 @@ function calculateProdBreakpoints() {
 var html = '<div class="table-header"><div class="table-cell">Productivity Level</div><div class="table-cell">Drills Per Side</div></div>';
 
 var beltSpeed = document.getElementById("prodBreakpointsTier").value;
-var hardness = document.getElementById("prodBreakpointsMaterial").value;
+var speed = document.getElementById("prodBreakpointsMaterial").value;
 
 var prod = 0;
 var previousDrills = -1;
 while (previousDrills != 1) {
-var drills = Math.ceil((beltSpeed) / (hardness * (1 + 2 * prod / 100)) / 2);
+var drills = Math.ceil((beltSpeed) / (speed * (1 + 2 * prod / 100)) / 2);
 if (drills != previousDrills) {
 html += '<div class="table-row"><div class="table-cell">' + prod + '</div><div class="table-cell">' + drills + '</div></div>';
 previousDrills = drills;
