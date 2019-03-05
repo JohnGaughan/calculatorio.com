@@ -3,7 +3,8 @@ layout: calculator
 title: Mining
 navigation_weight: 30
 permalink: /mining/
-factorio_version: 0.17.2
+factorio_version: 0.17.5
+mining_prod_bonus: 10
 ---
 
 ## Electric mining drills required to saturate a belt
@@ -38,6 +39,10 @@ The first number is the calculated number for the entire belt, but is likely a f
 <div class="input"><input type="text" id="drillsPerBeltProd" value="0" size="3"/></div>
 </div>
 <div class="input-row">
+<div class="input-label">Productivity:</div>
+<div class="input"><input type="text" id="productivityByBelt" disabled="" readonly="" size="5"/></div>
+</div>
+<div class="input-row">
 <div class="input-label">Drills:</div>
 <div class="input"><input type="text" id="drillsPerBelt" disabled="" readonly="" size="5"/></div>
 </div>
@@ -52,11 +57,12 @@ The first number is the calculated number for the entire belt, but is likely a f
 </div>
 <script>
 function calculateDrillsPerBelt() {
-var p = 1 + 2 * Number(document.getElementById("drillsPerBeltProd").value) / 100;
-var drills = Number(document.getElementById("drillsPerBeltTier").value) / (Number(document.getElementById("drillsPerBeltMaterial").value) * p);
+var productivity = 1 + ({{page.mining_prod_bonus}} * Number(document.getElementById("drillsPerBeltProd").value) / 100);
+var drills = Number(document.getElementById("drillsPerBeltTier").value) / (Number(document.getElementById("drillsPerBeltMaterial").value) * productivity);
 document.getElementById("drillsPerBelt").value = drills.toFixed(2);
 var perLane = Math.ceil(drills / 2);
 document.getElementById("drillsPerLane").value = perLane.toFixed(0);
+document.getElementById("productivityByBelt").value = (productivity * 100).toFixed(0) + "%";
 }
 </script>
 
@@ -100,6 +106,10 @@ This calculator is a sort-of inverse of the one above that tells you how many dr
 <div class="input"><input type="text" id="drillsPerBeltRight" size="5"/></div>
 </div>
 <div class="input-row">
+<div class="input-label">Productivity:</div>
+<div class="input"><input type="text" id="productivityByOrePatch" disabled="" readonly="" size="5"/></div>
+</div>
+<div class="input-row">
 <div class="input-label">Belts of output in the left lane:</div>
 <div class="input"><input type="text" id="drillsPerBeltLeftThroughput" disabled="" readonly="" size="5"/></div>
 </div>
@@ -114,12 +124,13 @@ This calculator is a sort-of inverse of the one above that tells you how many dr
 </div>
 <script>
 function calculateBeltsPerPatch() {
-var p = 1 + 2 * Number(document.getElementById("beltsPerPatchProd").value) / 100;
-var drillsPerBelt = Number(document.getElementById("beltsPerPatchTier").value) / (Number(document.getElementById("beltsPerPatchMaterial").value) * p);
+var productivity = 1 + ({{page.mining_prod_bonus}} * Number(document.getElementById("beltsPerPatchProd").value) / 100);
+var drillsPerBelt = Number(document.getElementById("beltsPerPatchTier").value) / (Number(document.getElementById("beltsPerPatchMaterial").value) * productivity);
 var beltsLeft = document.getElementById("drillsPerBeltLeft").value / drillsPerBelt;
 var beltsRight = document.getElementById("drillsPerBeltRight").value / drillsPerBelt;
 document.getElementById("drillsPerBeltLeftThroughput").value = beltsLeft.toFixed(2);
 document.getElementById("drillsPerBeltRightThroughput").value = beltsRight.toFixed(2);
+document.getElementById("productivityByOrePatch").value = (productivity * 100).toFixed(0) + "%";
 }
 </script>
 
@@ -167,7 +178,7 @@ var speed = document.getElementById("prodBreakpointsMaterial").value;
 var prod = 0;
 var previousDrills = -1;
 while (previousDrills != 1) {
-var drills = Math.ceil((beltSpeed) / (speed * (1 + 2 * prod / 100)) / 2);
+var drills = Math.ceil((beltSpeed) / (speed * (1 + ({{page.mining_prod_bonus}} * prod / 100))) / 2);
 if (drills != previousDrills) {
 html += '<div class="table-row"><div class="table-cell">' + prod + '</div><div class="table-cell">' + drills + '</div></div>';
 previousDrills = drills;
