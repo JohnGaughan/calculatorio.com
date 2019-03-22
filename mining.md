@@ -3,7 +3,7 @@ layout: calculator
 title: Mining
 navigation_weight: 30
 permalink: /mining/
-factorio_version: 0.17.5
+factorio_version: 0.17.17
 mining_prod_bonus: 10
 ---
 
@@ -125,7 +125,7 @@ This calculator is a sort-of inverse of the one above that tells you how many dr
 <script>
 function calculateBeltsPerPatch() {
 var productivity = 1 + ({{page.mining_prod_bonus}} * Number(document.getElementById("beltsPerPatchProd").value) / 100);
-var drillsPerBelt = Number(document.getElementById("beltsPerPatchTier").value) / (Number(document.getElementById("beltsPerPatchMaterial").value) * productivity);
+var drillsPerBelt = Number(document.getElementById("beltsPerPatchTier").value) / (Number(document.getElementById("beltsPerPatchMaterial").value) * productivity) / 2;
 var beltsLeft = document.getElementById("drillsPerBeltLeft").value / drillsPerBelt;
 var beltsRight = document.getElementById("drillsPerBeltRight").value / drillsPerBelt;
 document.getElementById("drillsPerBeltLeftThroughput").value = beltsLeft.toFixed(2);
