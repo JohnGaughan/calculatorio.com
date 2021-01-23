@@ -2,7 +2,7 @@
 layout: post
 title:  "On the purging of belt balancers"
 date:   2018-11-05 23:30:00 -0500
-categories: [balancers, blueprints]
+categories: 
 factorio_version: 0.16.51
 ---
 
