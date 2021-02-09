@@ -17,8 +17,8 @@ title: Calculatorio
 email: omega@calculatorio.com
 description: 
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://www.calculatorio.com/" # the base hostname & protocol for your site, e.g. http://example.com
-github_username:  calculatorio
+url: "https://calculatorio.com/"
+# github_username:
 
 # Build settings
 markdown: kramdown

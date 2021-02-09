@@ -11,7 +11,7 @@ I created this web site to share with the world some of the work I have done on 
 
 This site does not contain any paid advertising nor does it knowingly track users. My goal is to have a simple site that loads quickly and is completely non-commercial.
 
-You can view the entire site's source code in [the Calculatorio repository on GitHub](https://github.com/calculatorio/calculatorio.com).
+You can view the entire site's source code in [the Calculatorio repository on GitHub](https://github.com/JohnGaughan/calculatorio.com).
 
 ## About the game
 
